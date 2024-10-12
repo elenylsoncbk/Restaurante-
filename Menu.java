@@ -12,7 +12,7 @@ public class Menu {
     public static void main(String[] args) {
         inicializarListas();
         String comand;
-        System.out.println("   -Inicio do Programa-   ");
+        System.out.println("\n   -Inicio do Programa-   ");
         do {
             System.out.println("\n      -MENU-      ");
             System.out.print("""
@@ -43,7 +43,12 @@ public class Menu {
                     exibirRefeicao();
                 }
                 case "6" -> {
+                    try {
                     adicionarRefeicaoCardapio();
+                    }catch (Exception e){
+                        System.out.println("REFEIÇÃO INVALIDA");
+                        entrada.nextLine();
+                    }
                 }
                 case "7" -> {
                     exibirCardapio();
@@ -161,6 +166,7 @@ public class Menu {
         do {
             System.out.println("SELECIONE DESCRIÇÃO:");
             ideRef = entrada.nextInt();
+            entrada.nextLine();
             if (ideRef < 1 || ideRef > refeicoes.size()) {
                 System.out.println("INDICE INVALIDO!");
                 ideRef = -1;
@@ -174,7 +180,6 @@ public class Menu {
         int ideSem = -1;
         do {
             ideSem = entrada.nextInt();
-            entrada.nextLine();
             if (ideSem < 1 || ideSem > DiaSemana.values().length) {
                 System.out.println("INDICE INVALIDO!");
                 ideSem = -1;
