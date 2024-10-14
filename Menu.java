@@ -10,7 +10,7 @@ public class Menu {
     static final List<Refeicao> refeicoes = new ArrayList<>();
     static final Cardapio cardapio = new Cardapio();
     public static void main(String[] args) {
-        inicializarListas();
+        // inicializarListas();
         String comand;
         System.out.println("\n   -Inicio do Programa-   ");
         do {
