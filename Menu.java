@@ -10,7 +10,7 @@ public class Menu {
     static final List<Refeicao> refeicoes = new ArrayList<>();
     static final Cardapio cardapio = new Cardapio();
     public static void main(String[] args) {
-        // inicializarListas();
+//        inicializarListas ();
         String comand;
         System.out.println("\n   -Inicio do Programa-   ");
         do {
@@ -44,7 +44,7 @@ public class Menu {
                 }
                 case "6" -> {
                     try {
-                    adicionarRefeicaoCardapio();
+                        adicionarRefeicaoCardapio();
                     }catch (Exception e){
                         System.out.println("REFEIÇÃO INVALIDA");
                         entrada.nextLine();
@@ -68,22 +68,22 @@ public class Menu {
         System.out.print("DIGITE O PRATO PRINCIPAL: ");
         String tarefa = entrada.nextLine();
         pratoPrincipal.add(new PratoPrincipal(tarefa));
-        System.out.println("---ADICIONADO---");
+        System.out.println("----- ADICIONADO-----");
     }
     static void AdicionarAcompanhamento() {
         System.out.print("DIGITE ACOMPANHAMENTO: ");
         String tarefa = entrada.nextLine();
         acompanhamento.add(new Acompanhamento(tarefa));
-        System.out.println("---ADICIONADA---");
+        System.out.println("-----ADICIONADA-----");
     }
     static void AdicoinarSalada() {
         System.out.print("DIGITE A SALADA: ");
         String tarefa = entrada.nextLine();
         salada.add(new Salada(tarefa));
-        System.out.println("---ADICIONADO---");
+        System.out.println("-----ADICIONADO-----");
     }
     static void CadrastrarRefeicao() {
-        System.out.println("\n------- CADASTRAR REFEICAO -------\n");
+        System.out.println("\n------- CADASTRAR REFEICAO -------");
         if (pratoPrincipal.isEmpty()) {
             System.out.println("- NENHUM PRATO PRINCIPAL CADATRADO!");
             return;
@@ -99,8 +99,8 @@ public class Menu {
         exibirSaladas();
         exibirAcompanhamento();
         exibirPratoPrincipal();
-
-        System.out.println("\nDIGITE A DESCRIÇÃO ");
+        System.out.println("----------------------------");
+        System.out.println("\nDIGITE O NOME DA REFEÇÃO: ");
         var dnome = entrada.nextLine();
         int idePraPrin = -1;
         do {
@@ -136,11 +136,11 @@ public class Menu {
                 acompanhamento.get(ideAcom - 1),
                 salada.get(ideSal - 1)
         ));
+        System.out.println("----------------------------");
         entrada.nextLine();
     }
     static void exibirRefeicao() {
-        System.out.println("---ITENS CADASTRADO---");
-        System.out.println("----------------------------");
+        System.out.println("-----ITENS CADASTRADO-----");
         exibirSaladas();
         System.out.println("----------------------------");
         exibirPratoPrincipal();
@@ -149,7 +149,7 @@ public class Menu {
         System.out.println("----------------------------");
         int key =1;
         for (Refeicao r : refeicoes) {
-            System.out.println("NUMERO DA REFEIÇÃO: " + key);
+            System.out.println("\nNUMERO DA REFEIÇÃO: " + key);
             System.out.print(r.getDescricao());
             System.out.println();
             System.out.println(r.getSalada().getNome());
@@ -160,18 +160,20 @@ public class Menu {
         }
     }
     static void adicionarRefeicaoCardapio() {
-        System.out.println("\n--- ADICIONAR REFEICAO A CARDAPIO ---\n");
+        System.out.println("\n---ADICIONAR REFEICAO A CARDAPIO---\n");
         exibirRefeicao();
         int ideRef = -1;
         do {
-            System.out.println("SELECIONE DESCRIÇÃO:");
+            System.out.println("SELECIONE O NUMERO DA REFEIÇÃO:");
             ideRef = entrada.nextInt();
             entrada.nextLine();
             if (ideRef < 1 || ideRef > refeicoes.size()) {
                 System.out.println("INDICE INVALIDO!");
+                System.out.println("DIGITE NOVAMENTE:");
                 ideRef = -1;
+            }else {
+                System.out.println("-----ADICIONDO-----");
             }
-            System.out.println("---ADICIONDO---");
         } while (ideRef == -1);
         System.out.println("SELECIONE UM DIA DA SEMANA: ");
         for (DiaSemana diaSemana : DiaSemana.values()) {
@@ -182,9 +184,11 @@ public class Menu {
             ideSem = entrada.nextInt();
             if (ideSem < 1 || ideSem > DiaSemana.values().length) {
                 System.out.println("INDICE INVALIDO!");
+                System.out.println("DIGITE NOVAMENTE:");
                 ideSem = -1;
+            }else {
+                System.out.println("-----ADICIONADO-----");
             }
-            System.out.println("---ADICIONADO---");
         } while (ideSem == -1);
         System.out.println("\nSELECIONE UM TURNO: ");
         for (Turno turno : Turno.values()) {
@@ -196,9 +200,11 @@ public class Menu {
             entrada.nextLine();
             if (ideTur < 1 || ideTur > Turno.values().length) {
                 System.out.println("INDICE INVALIDO!");
+                System.out.println("DIGITE NOVAMENTE:");
                 ideTur = -1;
+            }else {
+            System.out.println("-----ADICIONADO-----");
             }
-            System.out.println("---ADICIONADO---");
         } while (ideTur == -1);
         cardapio.adicionarRefeicao(
                 DiaSemana.values()[ideSem - 1],
@@ -206,14 +212,16 @@ public class Menu {
                 refeicoes.get(ideRef - 1)
         );
         System.out.println("\nREFEIÇÃO ADICIONDA AO CARDAPIO!\n");
+        System.out.println("----------------------------");
     }
     public static void exibirCardapio() {
         for (DiaSemana dia : Cardapio.map.keySet()) {
             System.out.println("----------------------------");
-            System.out.println(dia);
+            System.out.println("        "+dia);
+            System.out.println("----------------------------");
             var mapInterno = cardapio.map.get(dia);
             for (Turno refe : mapInterno.keySet()) {
-                    System.out.println(refe);
+                System.out.println("        "+refe);
                 var r = mapInterno.get(refe);
                 System.out.println(r.getDescricao());
                 System.out.println(r.getSalada().getNome());
