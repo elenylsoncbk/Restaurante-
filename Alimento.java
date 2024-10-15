@@ -1,5 +1,3 @@
-package oo.Composicao.Desafio.Trabalho2;
-
 public class Alimento {
     protected String nome;
 
